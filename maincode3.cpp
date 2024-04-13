@@ -39,6 +39,40 @@ class animation
             cout<<"\n\n";
         }
 
+        void blinkload()
+            {
+                cout<<"\b\b\b\b\b\b\b\b\b\b | | | | | ";
+                Sleep(100);
+                
+                cout<<"   RUNNING\b\b\b\b\b\b\b\b\b\b";
+                Sleep(150);
+                cout<<"          \b\b\b\b\b\b\b\b\b\b";
+                
+                cout<<"\b\b\b\b\b\b\b\b\b\b\b / / / / / ";
+                Sleep(100);
+                
+                cout<<"   RUNNING\b\b\b\b\b\b\b\b\b\b";
+                Sleep(150);
+                cout<<"          \b\b\b\b\b\b\b\b\b\b";
+                
+                cout<<"\b\b\b\b\b\b\b\b\b\b\b - - - - - ";
+                Sleep(100);
+                
+                cout<<"   RUNNING\b\b\b\b\b\b\b\b\b\b";
+                Sleep(150);
+                cout<<"          \b\b\b\b\b\b\b\b\b\b";
+                    
+                cout<<"\b\b\b\b\b\b\b\b\b\b\b \\ \\ \\ \\ \\ ";
+                Sleep(100);
+                
+                cout<<"   RUNNING\b\b\b\b\b\b\b\b\b\b";
+                Sleep(150);
+                cout<<"          \b\b\b\b\b\b\b\b\b\b";
+
+                cout<<"\b\b\b\b\b\b\b\b\b\b\b";
+
+            }
+
         void consolecolor()
         {            
             HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -49,7 +83,6 @@ class animation
             SetConsoleTextAttribute(hConsole, attributes);                 
             system("cls");                                              // Clear the console screen
         }
-    
     };
 
 
@@ -222,6 +255,7 @@ class WareHouse : public animation
 
     };
 
+
 class Revenue
 {
     public:        
@@ -348,6 +382,7 @@ class Revenue
 
 
 };
+
 
 class ManageProduct: public WareHouse
     {
@@ -892,6 +927,12 @@ int main()
                                                         cout << PrintTotalWeight << endl;
                                                         cout << "Price Per Kg: ";
                                                         cout << WeightPerKg << "Kg" << endl;
+
+                                                        for(int i=0;i<2;i++)
+                                                            {
+                                                                load.blinkload();
+                                                            }
+
                                                         cout << "Total Revenue: ";
                                                         cout << PrintTotalWeight*WeightPerKg << endl;
 
@@ -921,7 +962,6 @@ int main()
                                                 
                                                 cout << "Enter Category Name: ";
                                                 cin >> searchItem;        
-                                                
                                                 string filename = warehouse.FileName;
                                                 
                                                 PrintTotalWeightCategory=money.WeightPerCategory(filename,searchItem);
@@ -933,6 +973,12 @@ int main()
                                                         cout << PrintTotalWeightCategory << endl;
                                                         cout << "Price Per Kg: ";
                                                         cout << WeightPerKg << " Kg" << endl;
+
+                                                        for(int i=0;i<2;i++)
+                                                            {
+                                                                load.blinkload();
+                                                            }
+                                                        
                                                         cout << "Total Revenue: ";
                                                         cout << PrintTotalWeightCategory*WeightPerKg << endl;
 
@@ -973,9 +1019,15 @@ int main()
                                                         cout << "Total Weight: ";
                                                         cout << PrintTotalWeightCity << endl;
                                                         cout << "Price Per Kg: ";
-                                                        cout << WeightPerKg << "Kg" << endl;
+                                                        cout << WeightPerKg << "Kg" << endl << endl;
+
+                                                        for(int i=0;i<2;i++)
+                                                            {
+                                                                load.blinkload();
+                                                            }
+                                                            
                                                         cout << "Total Revenue: ";
-                                                        cout << long (PrintTotalWeightCity*WeightPerKg) << endl;
+                                                        cout << long (PrintTotalWeightCity*WeightPerKg) << endl << endl;
 
                                                         cout << "Do you want to Change Default Price(y/n)\n";
                                                         cin >> WeightOption;
