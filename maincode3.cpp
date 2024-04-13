@@ -222,6 +222,132 @@ class WareHouse : public animation
 
     };
 
+class Revenue
+{
+    public:        
+    double TotalWeight;
+    double TotalWeightCategory;
+    double TotalWeightCity;
+    
+        float AllWeight(const string& filename) 
+            {
+                ifstream file(filename);
+                
+                if (!file.is_open()) 
+                    {
+                        cerr << "\n\n" << "Error opening file: " << filename << endl;
+                        return 0;
+                    }
+
+                string line;
+                
+                while (getline(file, line)) 
+                    {
+                        string city, category, productName;
+                        double price, weight;
+                        int quantity;
+                        char delimiter;
+
+                        istringstream lineStream(line);
+                        lineStream >> city >> delimiter >>category >> delimiter >> productName >> delimiter >> price >> delimiter >> quantity >> delimiter >> weight;
+
+                        TotalWeight+=weight*quantity;    
+                    }
+
+                return TotalWeight;
+
+                file.close();
+
+            }
+
+        float WeightPerCategory(const string& FileName, const string& searchTerm)
+            {
+                TotalWeightCategory=0;
+                string filename = FileName + ".txt";
+                ifstream file(filename);
+
+                if (!file.is_open())
+                    {
+                        cerr << "Error opening file: " << filename << endl;
+                        return 0.0f;
+                    }
+
+                bool found = false;
+                string line;
+
+
+                while (getline(file, line)) 
+                    {
+                        if (line.find(searchTerm) != string::npos) 
+                            {
+                                found = true;
+                                string city, category, productName;
+                                double price, weight;
+                                int quantity;
+                                char delimiter;
+
+                                istringstream lineStream(line);
+                                lineStream >> city >> delimiter >> category >> delimiter >> productName >> delimiter >> price >> delimiter >> quantity >> delimiter >> weight;
+    
+                                TotalWeightCategory+=quantity*weight;
+
+                            }
+                    }
+
+                    return TotalWeightCategory;
+                file.close();
+
+                if (!found)
+                    {
+                        cout << "Nothing found matching the search term." << endl;
+                    }     
+            }     
+
+        float WeightPerCity(const string& FileName, const string& searchTerm)
+            {
+                TotalWeightCity=0;
+                string filename = FileName + ".txt";
+                ifstream file(filename);
+
+                if (!file.is_open())
+                    {
+                        cerr << "Error opening file: " << filename << endl;
+                        return 0.0f;
+                    }
+
+                bool found = false;
+                string line;
+
+
+                while (getline(file, line)) 
+                    {
+                        if (line.find(searchTerm) != string::npos) 
+                            {
+                                found = true;
+                                string city, category, productName;
+                                double price, weight;
+                                int quantity;
+                                char delimiter;
+
+                                istringstream lineStream(line);
+                                lineStream >> city >> delimiter >> category >> delimiter >> productName >> delimiter >> price >> delimiter >> quantity >> delimiter >> weight;
+    
+                                TotalWeightCity+=quantity*weight;
+
+                            }
+                    }
+
+                    return TotalWeightCity;
+                file.close();
+
+                if (!found)
+                    {
+                        cout << "Nothing found matching the search term." << endl;
+                    }     
+            }     
+
+
+};
 
 class ManageProduct: public WareHouse
     {
@@ -493,15 +619,32 @@ class Menu
                     cout << "4. List All Products\n";
                     cout << "5. Filter Products\n";
                     cout << "6. Manage Product\n";
+                    cout << "7. Revenue Management\n";
                     cout << "0. Exit Program\n";
+                }
+
+            void ManageMenu()
+                {
+                    cout << "1. Change Price\n";
+                    cout << "2. Change Quantity\n";
+                    cout << "3. Display Each Product Details\n";
+                    cout << "0. Return to Main Menu\n";
                 }
 
             void FilterMenu()
                 {
                     cout << "\n\n";
                     cout << "1. Filter By Name\n";
-                    cout << "2. Filter By City\n";
-                    cout << "3. Filter By Category\n";    
+                    cout << "2. Filter By Category\n";
+                    cout << "3. Filter By City\n";    
+                    cout << "0. Return To Main Menu\n";
+                }
+            void RevenueMenu()
+                {
+                    cout << "\n\n";
+                    cout << "1. Total Revenue Generated\n";
+                    cout << "2. Revenue per Category\n";
+                    cout << "3. Revenue per City\n";
                     cout << "0. Return To Main Menu\n";
                 }
     };
@@ -511,7 +654,10 @@ int main()
     {
         animation load;
         Menu menu;
+        Revenue money;
+
         load.consolecolor();
+        
         int option;   
 
         do 
@@ -659,10 +805,7 @@ int main()
                                         string productName;
                                         string File = manage.FileName + ".txt";
                                         
-                                        cout << "1. Change Price\n";
-                                        cout << "2. Change Quantity\n";
-                                        cout << "3. Display Each Product Details\n";
-                                        cout << "0. Return to Main Menu\n";
+                                        menu.ManageMenu();
 
                                         cout << "\n->Enter Your Choice: ";
                                         cin >> option2;     
@@ -713,7 +856,156 @@ int main()
                                 while(option2!=0);
                                 break;
                             }
+
+                        case 7:
+                            {
+                                double PrintTotalWeight;
+                                double PrintTotalWeightCategory;
+                                double PrintTotalWeightCity;
+                                int choice;
+                                
+                                do
+                                {
+                                    menu.RevenueMenu();
+
+                                    cout << "Enter Your Choice: ";
+                                    cin >> choice;
+
+                                    system("cls");
+
+                                    switch(choice)
+                                    {
+                                        
+                                        case 1:
+                                            {      
+                                                int WeightPerKg=386;
+                                                char WeightOption;
+
+                                                string filename = warehouse.FileName+".txt";
+                                                
+                                                PrintTotalWeight=money.AllWeight(filename);
+                                                
+                                                do
+                                                    {
+
+                                                        cout << "Total Weight: ";
+                                                        cout << PrintTotalWeight << endl;
+                                                        cout << "Price Per Kg: ";
+                                                        cout << WeightPerKg << "Kg" << endl;
+                                                        cout << "Total Revenue: ";
+                                                        cout << PrintTotalWeight*WeightPerKg << endl;
+
+                                                        cout << "Do you want to Change Default Price(y/n)\n";
+                                                        cin >> WeightOption;
+                                                        
+                                                        if(WeightOption=='y')
+                                                            {
+                                                                cout << "Enter New Price Per (KG): ";
+                                                                cin >> WeightPerKg;
+                                                                
+                                                                system("cls");
+                                                            }
+                                                        system("cls");
+
+                                                    } 
+                                                while (WeightOption!='n');
+                                                break;
+                                            }
+
+                                        case 2:
+                                            {
+                                                int WeightPerKg=386;
+                                                char WeightOption;
+
+                                                string searchItem;
+                                                
+                                                cout << "Enter Category Name: ";
+                                                cin >> searchItem;        
+                                                
+                                                string filename = warehouse.FileName;
+                                                
+                                                PrintTotalWeightCategory=money.WeightPerCategory(filename,searchItem);
+
+                                                do
+                                                    {
+
+                                                        cout << "Total Weight: ";
+                                                        cout << PrintTotalWeightCategory << endl;
+                                                        cout << "Price Per Kg: ";
+                                                        cout << WeightPerKg << " Kg" << endl;
+                                                        cout << "Total Revenue: ";
+                                                        cout << PrintTotalWeightCategory*WeightPerKg << endl;
+
+                                                        cout << "Do you want to Change Default Price(y/n)\n";
+                                                        cin >> WeightOption;
+                                                        
+                                                        if(WeightOption=='y')
+                                                            {
+                                                                cout << "Enter New Price Per (KG): ";
+                                                                cin >> WeightPerKg;
+                                                                
+                                                                system("cls");
+                                                            }
+                                                        system("cls");
+
+                                                    } 
+                                                while (WeightOption!='n');
+                                                break;
                             
+                                            }
+
+                                        case 3:
+                                            {      
+                                                int WeightPerKg=386;
+                                                char WeightOption;
+
+                                                string searchItem;
+
+                                                cout << "Enter City Name: ";
+                                                cin >> searchItem;        
+                                                string filename = warehouse.FileName;
+
+                                                PrintTotalWeightCity=money.WeightPerCity(filename,searchItem);
+                                                
+                                                do
+                                                    {
+
+                                                        cout << "Total Weight: ";
+                                                        cout << PrintTotalWeightCity << endl;
+                                                        cout << "Price Per Kg: ";
+                                                        cout << WeightPerKg << "Kg" << endl;
+                                                        cout << "Total Revenue: ";
+                                                        cout << long (PrintTotalWeightCity*WeightPerKg) << endl;
+
+                                                        cout << "Do you want to Change Default Price(y/n)\n";
+                                                        cin >> WeightOption;
+                                                        
+                                                        if(WeightOption=='y')
+                                                            {
+                                                                cout << "Enter New Weight: ";
+                                                                cin >> WeightPerKg;
+                                                                
+                                                                system("cls");
+                                                            }
+                                                        system("cls");
+
+                                                    } 
+                                                while (WeightOption!='n');
+                                                break;
+                                            }
+                                        
+                                        case 0:
+                                            {
+                                                load.starload();
+                                                system("cls");
+                                            }
+                                    }
+                                } 
+                                while (choice!=0);
+                                break;
+                                
+                            }
+                        
                         case 0:
                             {
                                 system("cls");
@@ -730,10 +1022,11 @@ int main()
 
                                 return 0;
                             }
-
+                        
                         default:
                             cout << "Invalid choice\n";
                     }
+                            
             }
         while(option!=0);
 
