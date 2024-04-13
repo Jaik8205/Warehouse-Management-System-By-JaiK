@@ -19,21 +19,29 @@
  ***********************************************************************/
 
 
-#include <iostream>                                                 /*All Header files are declared here*/
+                                                                    /*
+                                                                    All Header files are declared here
+                                                                    */
+#include <iostream>                                                 
 #include <windows.h>
 #include <cstdlib>
 #include <fstream>                                                  
 #include <string>
 #include <set>
 #include <iomanip>
+#include <conio.h>
 
 using namespace std;
 
 
-const int MAX_PRODUCTS = 1000;                                      /*this constant is set for maximum 1000 products*/
+const int MAX_PRODUCTS = 1000;                                      /*
+                                                                    this constant is set for maximum 1000 products
+                                                                    */
 
 
-                                                                    /*Class animation has some ornamental functions*/
+                                                                    /*
+                                                                    Class animation has some ornamental functions
+                                                                    */
 class animation                                                        
     {
         public:
@@ -103,8 +111,7 @@ class animation
             CONSOLE_SCREEN_BUFFER_INFO bufferInfo;                      // Define a structure to hold console screen buffer information
             GetConsoleScreenBufferInfo(hConsole, &bufferInfo);          // Set the background color for the entire console window
             WORD attributes = bufferInfo.wAttributes & 0xFFF0;          // Clear current background color
-            attributes |= BACKGROUND_INTENSITY;                         // Set new background color
-            SetConsoleTextAttribute(hConsole, attributes);                 
+            SetConsoleTextAttribute(hConsole, 249);       
             system("cls");                                              // Clear the console screen
         }
     };
@@ -498,7 +505,7 @@ class ManageProduct: public WareHouse
 
                                             char confirm;
                                             cout << "\nAre you sure you want to change the price? (Y/N): ";
-                                            cin >> confirm;
+                                            confirm=_getch();
 
                                             if (confirm == 'Y' || confirm == 'y') 
                                                 {
@@ -652,7 +659,7 @@ class ManageProduct: public WareHouse
 
                                             char confirm;
                                             cout << "\nAre you sure you want to change the quantity? (Y/N): ";
-                                            cin >> confirm;
+                                            confirm=_getch();
 
                                             if (confirm == 'Y' || confirm == 'y') 
                                                 {
@@ -774,10 +781,10 @@ int main()
 
                 
                 cout << "\n->Enter Your Choice: ";
-                cin >> option;
+                // cin >> option;
+                option=_getch()-'0';
 
                 cout << "\n\n";
-                cin.ignore(); 
 
                 WareHouse warehouse;               
 
@@ -858,12 +865,14 @@ int main()
                                         menu.FilterMenu();
 
                                         cout << "\n->Enter Your Choice: ";
-                                        cin >> option2; 
+                                        option2= _getch()-'0';                          
 
                                         switch(option2)
                                             {
                                                 case 1:
                                                     {              
+                                                        
+                                                        system("cls");
                                                         cout<<"\n\nFilter The Product By Name: ";
                                                         cin>>searchItem;        
                                                         warehouse.searchProducts(warehouse.FileName, searchItem);
@@ -871,7 +880,9 @@ int main()
                                                     }
 
                                                 case 2:
-                                                    {              
+                                                    {   
+                                                        
+                                                        system("cls");           
                                                         cout<<"\n\nFilter The Product By Category: ";
                                                         cin>>searchItem;        
                                                         warehouse.searchProducts(warehouse.FileName, searchItem);
@@ -879,7 +890,9 @@ int main()
                                                     }
                                                 
                                                 case 3:
-                                                    {              
+                                                    {   
+                                                        
+                                                        system("cls");           
                                                         cout<<"\n\nFilter The Product By City: ";
                                                         cin>>searchItem;        
                                                         warehouse.searchProducts(warehouse.FileName, searchItem);
@@ -888,12 +901,12 @@ int main()
 
                                                 case 0:
                                                     {
-                                                        load.starload();
-                                                                                                                    
+                                                        system("cls");
+                                                        load.starload();                                             
                                                         system("cls");
                                                         break;
                                                     }
-
+                                                
                                             }
 
                                     }
@@ -916,7 +929,8 @@ int main()
                                         menu.ManageMenu();
 
                                         cout << "\n->Enter Your Choice: ";
-                                        cin >> option2;     
+                                        option2=_getch()-'0';
+                                        system("cls");
 
                                         switch(option2)
                                             {
@@ -976,8 +990,8 @@ int main()
                                 {
                                     menu.RevenueMenu();
 
-                                    cout << "Enter Your Choice: ";
-                                    cin >> choice;
+                                    cout << "\nEnter Your Choice: ";
+                                    choice=_getch()-'0';
 
                                     system("cls");
 
@@ -996,25 +1010,25 @@ int main()
                                                 do
                                                     {
 
-                                                        cout << "Total Weight: ";
+                                                        cout << "\nTotal Weight: ";
                                                         cout << PrintTotalWeight << endl;
-                                                        cout << "Price Per Kg: ";
-                                                        cout << WeightPerKg << "Kg" << endl;
+                                                        cout << "\nPrice Per Kg: ";
+                                                        cout << "Rs." << fixed << setprecision(0) << WeightPerKg << endl;
 
                                                         for(int i=0;i<2;i++)
                                                             {
                                                                 load.blinkload();
                                                             }
 
-                                                        cout << "Total Revenue: ";
+                                                        cout << "\nTotal Revenue: ";
                                                         cout << PrintTotalWeight*WeightPerKg << endl;
 
-                                                        cout << "Do you want to Change Default Price(y/n)\n";
-                                                        cin >> WeightOption;
+                                                        cout << "\nDo you want to Change Default Price(y/n)\n";
+                                                        WeightOption=_getch();
                                                         
                                                         if(WeightOption=='y')
                                                             {
-                                                                cout << "Enter New Price Per (KG): ";
+                                                                cout << "\nEnter New Price Per (KG): ";
                                                                 cin >> WeightPerKg;
                                                                 
                                                                 system("cls");
@@ -1033,7 +1047,7 @@ int main()
 
                                                 string searchItem;
                                                 
-                                                cout << "Enter Category Name: ";
+                                                cout << "\nEnter Category Name: ";
                                                 cin >> searchItem;        
                                                 string filename = warehouse.FileName;
                                                 
@@ -1042,25 +1056,25 @@ int main()
                                                 do
                                                     {
 
-                                                        cout << "Total Weight: ";
+                                                        cout << "\nTotal Weight: ";
                                                         cout << PrintTotalWeightCategory << endl;
-                                                        cout << "Price Per Kg: ";
-                                                        cout << WeightPerKg << " Kg" << endl;
+                                                        cout << "\nPrice Per Kg: ";
+                                                        cout << "Rs." << fixed << setprecision(0) << WeightPerKg << endl;
 
                                                         for(int i=0;i<2;i++)
                                                             {
                                                                 load.blinkload();
                                                             }
                                                         
-                                                        cout << "Total Revenue: ";
+                                                        cout << "\nTotal Revenue: ";
                                                         cout << PrintTotalWeightCategory*WeightPerKg << endl;
 
-                                                        cout << "Do you want to Change Default Price(y/n)\n";
-                                                        cin >> WeightOption;
+                                                        cout << "\nDo you want to Change Default Price(y/n)\n";
+                                                        WeightOption=_getch();
                                                         
                                                         if(WeightOption=='y')
                                                             {
-                                                                cout << "Enter New Price Per (KG): ";
+                                                                cout << "\nEnter New Price Per (KG): ";
                                                                 cin >> WeightPerKg;
                                                                 
                                                                 system("cls");
@@ -1080,7 +1094,7 @@ int main()
 
                                                 string searchItem;
 
-                                                cout << "Enter City Name: ";
+                                                cout << "\nEnter City Name: ";
                                                 cin >> searchItem;        
                                                 string filename = warehouse.FileName;
 
@@ -1089,25 +1103,25 @@ int main()
                                                 do
                                                     {
 
-                                                        cout << "Total Weight: ";
+                                                        cout << "\nTotal Weight: ";
                                                         cout << PrintTotalWeightCity << endl;
-                                                        cout << "Price Per Kg: ";
-                                                        cout << WeightPerKg << "Kg" << endl << endl;
+                                                        cout << "\nPrice Per Kg: ";
+                                                        cout << "Rs." << fixed << setprecision(0) << WeightPerKg << endl;
 
                                                         for(int i=0;i<2;i++)
                                                             {
                                                                 load.blinkload();
                                                             }
                                                             
-                                                        cout << "Total Revenue: ";
+                                                        cout << "\nTotal Revenue: ";
                                                         cout << long (PrintTotalWeightCity*WeightPerKg) << endl << endl;
 
-                                                        cout << "Do you want to Change Default Price(y/n)\n";
-                                                        cin >> WeightOption;
+                                                        cout << "\nDo you want to Change Default Price(y/n)\n";
+                                                        WeightOption=_getch();
                                                         
                                                         if(WeightOption=='y')
                                                             {
-                                                                cout << "Enter New Weight: ";
+                                                                cout << "\nEnter New Price Per (Kg): ";
                                                                 cin >> WeightPerKg;
                                                                 
                                                                 system("cls");
