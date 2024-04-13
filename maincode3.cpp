@@ -1,16 +1,19 @@
-#include <iostream>
+#include <iostream>                                                 /*All Header files are declared here*/
 #include <windows.h>
 #include <cstdlib>
-#include <fstream>
+#include <fstream>                                                  
 #include <string>
 #include <set>
 #include <iomanip>
 
 using namespace std;
 
-const int MAX_PRODUCTS = 1000; 
 
-class animation
+const int MAX_PRODUCTS = 1000;                                      /*this constant is set for maximum 1000 products*/
+
+
+                                                                    /*Class animation has some ornamental functions*/
+class animation                                                        
     {
         public:
 
@@ -86,7 +89,18 @@ class animation
     };
 
 
-class WareHouse : public animation
+                                                                    /*
+                                                                    here class animation is Inherited by Class WareHouse,
+                                                                    
+                                                                    This class contains:
+                                                                        1. Add Product              :   (to add products to the warehouse)
+                                                                        2. Listcities               :   (to list all the cities in which our warehouses are present)
+                                                                        3. ListUniqueCategories     :   (to list all categories in which we categorize our stock)
+                                                                        4. displayproductfromfile   :   (to list all the product from all the categories
+                                                                                                         available in all cities)
+                                                                        5. Searchproducts           :   (to search a particular product or category or city)
+                                                                    */
+class WareHouse : public animation                                     
     {
         public:
             animation load;
@@ -256,6 +270,17 @@ class WareHouse : public animation
     };
 
 
+                                                                    /*
+                                                                    this Class Revenue tells us about the money earned by storing the products and the 
+                                                                    charging criteria is by charging products using their weight
+                                                                    
+                                                                    This Class contains:
+                                                                        1.AllWeight             :   (to display total weight of all products (quantity * WeightPerProduct)
+                                                                                                    and then adding them and multiplying them with a default WeightPerKg value 
+                                                                                                    which can also be changed)
+                                                                        2. WeightPerCategory    :   to display weight stored in each category
+                                                                        3. WeightPerCity        :   to display weight stored in each city   
+                                                                    */
 class Revenue
 {
     public:        
@@ -384,6 +409,16 @@ class Revenue
 };
 
 
+                                                                    /*
+                                                                    here class WareHouse is Inherited by class Manageproduct,
+                                                                    
+                                                                    This class Contains:
+                                                                        1. changeprice  :   (to change the price of a product)
+                                                                        2. displayproducts  :   (to show details of a particular product)
+                                                                        3. changequanity    :   (to change quantity of a product)
+
+                                                                    This class depicts that warehouses are constantly Importing and Exporting products        
+                                                                    */
 class ManageProduct: public WareHouse
     {
         public:
@@ -641,6 +676,15 @@ class ManageProduct: public WareHouse
     };
 
 
+                                                                    /*
+                                                                    This class consists of all menus used throughout the program
+
+                                                                    This class contains:
+                                                                        1. MainMenu
+                                                                        2. ManageMenu
+                                                                        3. FilterMenu
+                                                                        4. RevenueMenu
+                                                                    */
 class Menu
     {
         public:
@@ -674,6 +718,7 @@ class Menu
                     cout << "3. Filter By City\n";    
                     cout << "0. Return To Main Menu\n";
                 }
+            
             void RevenueMenu()
                 {
                     cout << "\n\n";
@@ -685,6 +730,13 @@ class Menu
     };
 
 
+                                                                    /*
+                                                                    This is the main function in which whole code will run
+
+                                                                    Main function contains:
+                                                                        All the switches and nested switches to run the menus inside a do while loop 
+                                                                        to mimic a forever runnig program
+                                                                    */
 int main()
     {
         animation load;
