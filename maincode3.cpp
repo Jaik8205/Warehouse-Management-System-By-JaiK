@@ -1,3 +1,24 @@
+/***********************************************************************
+ * Author: Jai Kumar (Jaik)
+ * Date: April 15, 2024                                                     
+ *                                                                  
+ * Description:
+ *   This program demonstrates a Warehouse Management System.
+ *   You can add your warehouse Locations, Categories, and Products.
+ *   You can filter them, Search your entries
+ *   Manipulate many Things..!!
+ * 
+ * Go check out yourself..!!
+ * 
+ * Additional Things Needed to run this code:
+ *  1. "warehouse.txt" file provided with this code.
+ * 
+ * You can also access all materials through:
+ * https://github.com/Jaik8205/Warehouse-Management-System-By-JaiK 
+ * 
+ ***********************************************************************/
+
+
 #include <iostream>                                                 /*All Header files are declared here*/
 #include <windows.h>
 #include <cstdlib>
