@@ -18,7 +18,6 @@
  * 
  ***********************************************************************/
 
-
                                                                     /*
                                                                     All Header files are declared here
                                                                     */
@@ -30,6 +29,7 @@
 #include <set>
 #include <iomanip>
 #include <conio.h>
+
 
 using namespace std;
 
@@ -126,7 +126,8 @@ class animation
                                                                         3. ListUniqueCategories     :   (to list all categories in which we categorize our stock)
                                                                         4. displayproductfromfile   :   (to list all the product from all the categories
                                                                                                          available in all cities)
-                                                                        5. Searchproducts           :   (to search a particular product or category or city)
+                                                                        5. Searchproducts           :   (to search a particular product or category or city or both)
+                                                                        {In Searchproducts Function Overloading is used}
                                                                     */
 class WareHouse : public animation                                     
     {
@@ -148,6 +149,29 @@ class WareHouse : public animation
                     
                     file << city << " | " << category << " | " << productName << " | " << price << " | " << quantity << " | " << weight << endl;
                     file.close();
+                }
+
+            void countProducts(const string& filename) 
+                {
+                    ifstream inputFile(filename);
+                
+                    if (!inputFile.is_open()) 
+                        {
+                            cerr << "Error: Unable to open file " << filename << endl;
+                            return; 
+                        }
+
+                    int ProductCount = 0;
+                    string line;
+
+                    while (getline(inputFile, line)) 
+                        {
+                            ProductCount++;
+                        }
+
+                    cout << ProductCount;
+
+                    inputFile.close();
                 }
 
             void listcities() 
@@ -175,7 +199,7 @@ class WareHouse : public animation
                     file.close();
 
                     cout << "\n\n";
-                    cout << "Unique categories in the warehouse\n::CATEGORIES::" << endl;
+                    cout << "::TOTAL CITIES::" << endl;
                     for (const auto& category : uniqueCategories) 
                         {
                             cout << setfill('-') << setw(20) << "" << setfill(' ') << endl;
@@ -292,6 +316,51 @@ class WareHouse : public animation
                     if (!found)
                         {
                             cout << "No products found matching the search term." << endl;
+                        }
+                }
+
+            void searchProducts(const string& FileName, const string& searchCity, const string& searchCategory) 
+                {
+                    string filename = FileName + ".txt";
+                    ifstream file(filename);
+
+                    if (!file.is_open()) 
+                        {
+                            cerr << "Error opening file: " << filename << endl;
+                            return;
+                        }
+
+                    bool found = false;
+                    string line;
+
+                    cout << left << setw(25) << "City" << setw(25) << "Category" << setw(30) << "Product Name" << setw(20) << "Price" << setw(15) << "Quantity" << setw(15) << "Weight" << endl;
+
+                    while (getline(file, line)) 
+                        {
+                            string city, category, productName;
+                            double price, weight;
+                            int quantity;
+                            char delimiter;
+
+                            istringstream lineStream(line);
+                            lineStream >> city >> delimiter >> category >> delimiter >> productName >> delimiter >> price >> delimiter >> quantity >> delimiter >> weight;
+
+                            bool cityMatch = searchCity.empty() || city == searchCity;
+                            bool categoryMatch = searchCategory.empty() || category == searchCategory;
+
+                            if (cityMatch && categoryMatch) 
+                                {
+                                    found = true;
+                                    cout << setfill('-') << setw(130) << "" << setfill(' ') << endl;
+                                    cout << left << setw(25) << city << setw(25) << category << setw(30) << productName << setw(20) << price << setw(15) << quantity << setw(15) << weight << endl;
+                                }
+                        }
+
+                    file.close();
+
+                    if (!found) 
+                        {
+                            cout << "No products found matching the search criteria." << endl;
                         }
                 }
 
@@ -727,6 +796,7 @@ class Menu
                     cout << "5. Filter Products\n";
                     cout << "6. Manage Product\n";
                     cout << "7. Revenue Management\n";
+                    cout << "8. Total Products\n";
                     cout << "0. Exit Program\n";
                 }
 
@@ -744,6 +814,7 @@ class Menu
                     cout << "1. Filter By Name\n";
                     cout << "2. Filter By Category\n";
                     cout << "3. Filter By City\n";    
+                    cout << "4. Filter By City and Category\n";    
                     cout << "0. Return To Main Menu\n";
                 }
             
@@ -770,6 +841,7 @@ int main()
         animation load;
         Menu menu;
         Revenue money;
+        WareHouse warehouse;               
 
         load.consolecolor();
         
@@ -781,12 +853,10 @@ int main()
 
                 
                 cout << "\n->Enter Your Choice: ";
-                // cin >> option;
                 option=_getch()-'0';
 
                 cout << "\n\n";
 
-                WareHouse warehouse;               
 
                 switch (option) 
                     {
@@ -899,6 +969,21 @@ int main()
                                                         break;
                                                     }
 
+                                                case 4:
+                                                    {
+                                                        system("cls");
+                                                        string searchCity;
+                                                        string searchCategory;
+
+                                                        cout<<"\n\nEnter City Name: ";
+                                                        cin>>searchCity;
+                                                        cout<<"\n\nEnter Category Name: ";
+                                                        cin>>searchCategory;
+                                                        
+                                                        warehouse.searchProducts(warehouse.FileName, searchCity, searchCategory);  
+                                                        break;
+                                                    }
+
                                                 case 0:
                                                     {
                                                         system("cls");
@@ -988,6 +1073,7 @@ int main()
                                 
                                 do
                                 {
+                                    system("cls");
                                     menu.RevenueMenu();
 
                                     cout << "\nEnter Your Choice: ";
@@ -1011,7 +1097,7 @@ int main()
                                                     {
 
                                                         cout << "\nTotal Weight: ";
-                                                        cout << PrintTotalWeight << endl;
+                                                        cout << PrintTotalWeight << " Kg" << endl;
                                                         cout << "\nPrice Per Kg: ";
                                                         cout << "Rs." << fixed << setprecision(0) << WeightPerKg << endl;
 
@@ -1020,7 +1106,7 @@ int main()
                                                                 load.blinkload();
                                                             }
 
-                                                        cout << "\nTotal Revenue: ";
+                                                        cout << "\nTotal Revenue: Rs.";
                                                         cout << PrintTotalWeight*WeightPerKg << endl;
 
                                                         cout << "\nDo you want to Change Default Price(y/n)\n";
@@ -1057,7 +1143,7 @@ int main()
                                                     {
 
                                                         cout << "\nTotal Weight: ";
-                                                        cout << PrintTotalWeightCategory << endl;
+                                                        cout << PrintTotalWeightCategory << " Kg" << endl;
                                                         cout << "\nPrice Per Kg: ";
                                                         cout << "Rs." << fixed << setprecision(0) << WeightPerKg << endl;
 
@@ -1066,7 +1152,7 @@ int main()
                                                                 load.blinkload();
                                                             }
                                                         
-                                                        cout << "\nTotal Revenue: ";
+                                                        cout << "\nTotal Revenue: Rs.";
                                                         cout << PrintTotalWeightCategory*WeightPerKg << endl;
 
                                                         cout << "\nDo you want to Change Default Price(y/n)\n";
@@ -1104,8 +1190,8 @@ int main()
                                                     {
 
                                                         cout << "\nTotal Weight: ";
-                                                        cout << PrintTotalWeightCity << endl;
-                                                        cout << "\nPrice Per Kg: ";
+                                                        cout << PrintTotalWeightCity << " Kg" << endl;
+                                                        cout << "\nPrice Per Kg: Rs.";
                                                         cout << "Rs." << fixed << setprecision(0) << WeightPerKg << endl;
 
                                                         for(int i=0;i<2;i++)
@@ -1143,6 +1229,18 @@ int main()
                                 while (choice!=0);
                                 break;
                                 
+                            }
+
+                        case 8:
+                            {
+                                system("cls");
+                                string filename=warehouse.FileName+".txt";
+                                cout << endl << setfill('-') << setw(45) << "" << setfill(' ') << endl;
+                                cout << "Total Products In Our All WareHouses: ";
+                                warehouse.countProducts(filename);  
+                                cout << endl << setfill('-') << setw(45) << "" << setfill(' ') << endl;
+                                cout << "\n";
+                                break;
                             }
                         
                         case 0:
