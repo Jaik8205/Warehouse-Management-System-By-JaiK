@@ -58,6 +58,63 @@ class animation
                 Sleep(150);
                 cout<<"\b\b\b\b\b\b\b\b\b\b\b";
             }
+       
+        void starload(int howlong)
+            {
+                for(int i=0;i<howlong;i++)
+                    {
+                        cout << "\t" << "  o..  " << "\t" << "  o..  " << "\t" << "  o..  " << endl;
+                        cout << "\t" << " .   . " << "\t" << " .   . " << "\t" << " .   . " << endl;
+                        cout << "\t" << "  ...  " << "\t" << "  ...  " << "\t" << "  ...  " << endl;
+                        
+                        cout << "\t\tExiting" << endl;
+                        Sleep(100);
+                        system("cls");
+
+                        cout << "\t" << "  .o.  " << "\t" << "  .o.  " << "\t" << "  .o.  " << endl;
+                        cout << "\t" << " .   . " << "\t" << " .   . " << "\t" << " .   . " << endl;
+                        cout << "\t" << "  ...  " << "\t" << "  ...  " << "\t" << "  ...  " << endl;
+                        Sleep(100);
+                        system("cls");
+
+                        cout << "\t" << "  ..o  " << "\t" << "  ..o  " << "\t" << "  ..o  " << endl;
+                        cout << "\t" << " .   . " << "\t" << " .   . " << "\t" << " .   . " << endl;
+                        cout << "\t" << "  ...  " << "\t" << "  ...  " << "\t" << "  ...  " << endl;
+                        Sleep(100);
+                        system("cls");
+
+                        
+                        cout << "\t" << "  ...  " << "\t" << "  ...  " << "\t" << "  ...  " << endl;
+                        cout << "\t" << " .   o " << "\t" << " .   o " << "\t" << " .   o " << endl;
+                        cout << "\t" << "  ...  " << "\t" << "  ...  " << "\t" << "  ...  " << endl;
+                        Sleep(100);
+                        system("cls");
+
+                        cout << "\t" << "  ...  " << "\t" << "  ...  " << "\t" << "  ...  " << endl;
+                        cout << "\t" << " .   . " << "\t" << " .   . " << "\t" << " .   . " << endl;
+                        cout << "\t" << "  ..o  " << "\t" << "  ..o  " << "\t" << "  ..o  " << endl;
+                        Sleep(100);
+                        system("cls");
+
+                        cout << "\t" << "  ...  " << "\t" << "  ...  " << "\t" << "  ...  " << endl;
+                        cout << "\t" << " .   . " << "\t" << " .   . " << "\t" << " .   . " << endl;
+                        cout << "\t" << "  .o.  " << "\t" << "  .o.  " << "\t" << "  .o.  " << endl;
+                        Sleep(100);
+                        system("cls");
+
+                        cout << "\t" << "  ...  " << "\t" << "  ...  " << "\t" << "  ...  " << endl;
+                        cout << "\t" << " .   . " << "\t" << " .   . " << "\t" << " .   . " << endl;
+                        cout << "\t" << "  o..  " << "\t" << "  o..  " << "\t" << "  o..  " << endl;      
+                        Sleep(100);
+                        system("cls");
+
+                        cout << "\t" << "  ...  " << "\t" << "  ...  " << "\t" << "  ...  " << endl;
+                        cout << "\t" << " o   . " << "\t" << " o   . " << "\t" << " o   . " << endl;
+                        cout << "\t" << "  ...  " << "\t" << "  ...  " << "\t" << "  ...  " << endl;
+                        Sleep(100);
+                        system("cls");   
+                    }
+            }
 
         void starload()
         {
@@ -844,6 +901,7 @@ class Menu
 
             void ManageMenu()
                 {
+                    cout << "\n\n";
                     cout << "1. Change Price\n";
                     cout << "2. Change Quantity\n";
                     cout << "3. Display Each Product Details\n";
@@ -877,6 +935,7 @@ class Menu
                                                                     Main function contains:
                                                                         All the switches and nested switches to run the menus inside a do while loop 
                                                                         to mimic a forever runnig program
+                                                                        
                                                                     */
 int main()
     {
@@ -1293,18 +1352,7 @@ int main()
                         case 0:
                             {
                                 system("cls");
-
-                                cout << endl;
-                                cout << "     /|||||||||||\\\n";
-                                cout << "     || Exiting ||\n";
-                                cout << "     \\|||||||||||/\n\n";
-
-                                for(int i=0;i<2;i++)
-                                    {
-                                        cout << "\t";
-                                        load.loading();
-                                    }
-                                
+                                load.starload(3);
                                 system("cls");
 
                                 return 0;
