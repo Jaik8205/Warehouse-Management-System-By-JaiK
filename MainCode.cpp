@@ -105,6 +105,48 @@ class animation
 
             }
 
+        void leftrightstarload()
+            {
+                cout << "\n\t";
+
+                cout << " * . . . .";
+                cout << "\b\b\b\b\b\b\b\b\b\b";
+                Sleep(100);
+                cout << " . * . . .";
+                cout << "\b\b\b\b\b\b\b\b\b\b";
+                Sleep(100);
+                cout << " . . * . .";
+                cout << "\b\b\b\b\b\b\b\b\b\b";
+                Sleep(100);
+                cout << " . . . * .";
+                cout << "\b\b\b\b\b\b\b\b\b\b";
+                Sleep(100);
+                cout << " . . . . *";
+                cout << "\b\b\b\b\b\b\b\b\b\b";
+                Sleep(100);
+                cout << " . . . . .";
+                cout << "\b\b\b\b\b\b\b\b\b\b";
+                Sleep(100);
+                cout << " . . . . *";
+                cout << "\b\b\b\b\b\b\b\b\b\b";
+                Sleep(100);
+                cout << " . . . * .";
+                cout << "\b\b\b\b\b\b\b\b\b\b";
+                Sleep(100);
+                cout << " . . * . .";
+                cout << "\b\b\b\b\b\b\b\b\b\b";
+                Sleep(100);
+                cout << " . * . . .";
+                cout << "\b\b\b\b\b\b\b\b\b\b";
+                Sleep(100);
+                cout << " * . . . .";
+                cout << "\b\b\b\b\b\b\b\b\b\b";
+                Sleep(100);
+                cout << " . . . . .";
+                cout << "\b\b\b\b\b\b\b\b\b\b";
+                Sleep(100);
+            }
+
         void consolecolor()
         {            
             HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -1221,7 +1263,7 @@ int main()
                                         
                                         case 0:
                                             {
-                                                load.starload();
+                                                load.leftrightstarload();
                                                 system("cls");
                                             }
                                     }
@@ -1235,6 +1277,11 @@ int main()
                             {
                                 system("cls");
                                 string filename=warehouse.FileName+".txt";
+
+                                load.leftrightstarload();
+
+                                system("cls");
+
                                 cout << endl << setfill('-') << setw(45) << "" << setfill(' ') << endl;
                                 cout << "Total Products In Our All WareHouses: ";
                                 warehouse.countProducts(filename);  
@@ -1246,12 +1293,15 @@ int main()
                         case 0:
                             {
                                 system("cls");
-                                cout << "/|||||||||||\\\n";
-                                cout << "|| Exiting ||\n";
-                                cout << "\\|||||||||||/\n\n";
+
+                                cout << endl;
+                                cout << "     /|||||||||||\\\n";
+                                cout << "     || Exiting ||\n";
+                                cout << "     \\|||||||||||/\n\n";
 
                                 for(int i=0;i<2;i++)
                                     {
+                                        cout << "\t";
                                         load.loading();
                                     }
                                 
