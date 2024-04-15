@@ -1146,7 +1146,7 @@ int main()
                                                 case 3:
 
                                                     {
-                                                        cout << "\nName of Product to be Modified: ";
+                                                        cout << "\nName of Product to be Displayed: ";
                                                         cin >> productName;
                                                      
                                                         manage.displayProductDetails(File, productName);
