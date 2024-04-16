@@ -896,6 +896,7 @@ class Menu
                     cout << "6. Manage Product\n";
                     cout << "7. Revenue Management\n";
                     cout << "8. Total Products\n";
+                    cout << "9. Author Info\n";
                     cout << "0. Exit Program\n";
                 }
 
@@ -1346,6 +1347,35 @@ int main()
                                 warehouse.countProducts(filename);  
                                 cout << endl << setfill('-') << setw(45) << "" << setfill(' ') << endl;
                                 cout << "\n";
+                                break;
+                            }
+
+                        case 9:
+                            {
+                                
+                                system("cls");
+
+                                cout << endl << endl;
+                                cout << "/***********************************************************************" << endl;
+                                cout << "* Author: Jai Kumar (Jaik)" << endl;
+                                cout << "* Date: April 15, 2024                                                     " << endl;
+                                cout << "*               " << endl;                                                   
+                                cout << "* Description:" << endl;
+                                cout << "*   This program demonstrates a Warehouse Management System." << endl;
+                                cout << "*   You can add your warehouse Locations, Categories, and Products." << endl;
+                                cout << "*   You can filter them, Search your entries" << endl;
+                                cout << "*   Manipulate many Things..!!" << endl;
+                                cout << "* " << endl;
+                                cout << "* Go check out yourself..!!" << endl;
+                                cout << "* " << endl;
+                                cout << "* Additional Things Needed to run this code:" << endl;
+                                cout << "*  1. \"warehouse.txt\" file provided with this code." << endl;
+                                cout << "* " << endl;
+                                cout << "* You can also access all materials through:" << endl;
+                                cout << "* https://github.com/Jaik8205/Warehouse-Management-System-By-JaiK " << endl;
+                                cout << "* " << endl;
+                                cout << "***********************************************************************/" << endl;
+
                                 break;
                             }
                         
