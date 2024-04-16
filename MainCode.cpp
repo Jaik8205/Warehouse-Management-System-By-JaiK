@@ -18,6 +18,7 @@
  * 
  ***********************************************************************/
 
+
                                                                     /*
                                                                     All Header files are declared here
                                                                     */
@@ -869,6 +870,84 @@ class ManageProduct: public WareHouse
                         }
                 }
 
+            void deleteProduct(const string& filename, const string& productName, const string& city, const string& category) 
+                {
+                    ifstream inFile(filename);
+                    ofstream outFile("temp.txt");
+
+                    if (!inFile.is_open()) 
+                        {
+                            cerr << "Error opening file: " << filename << endl;
+                            return;
+                        }
+
+                    bool found = false;
+                    string line;
+
+                    while (getline(inFile, line)) 
+                        {
+                            string entryCity, entryCategory, entryProductName;
+                            double price;
+                            int quantity;
+                            double weight;
+                            char delimiter;
+
+                            stringstream ss(line);
+
+                            if (ss >> entryCity >> delimiter >> entryCategory >> delimiter >> entryProductName >> delimiter >> price >> delimiter >> quantity >> delimiter >> weight) 
+                                {
+                                    if (entryCity == city && entryCategory == category && entryProductName == productName) 
+                                        {
+                                            found = true;
+                                            cout << "Details for product '" << productName << "':" << endl;
+                                            cout << setfill('-') << setw(15) << "" << setfill(' ') << endl;
+                                            cout << setw(15) << left << "City:" << setw(15) << left << entryCity << endl;
+                                            cout << setw(15) << left << "Category:" << setw(15) << left << entryCategory << endl;
+                                            cout << setw(15) << left << "Product Name:" << setw(15) << left << entryProductName << endl;
+                                            cout << setw(15) << left << "Price:" << setw(15) << left << price << endl;
+                                            cout << setw(15) << left << "Quantity:" << setw(15) << left << quantity << endl;
+                                            cout << setw(15) << left << "Weight:" << setw(15) << left << weight << endl;
+                                            cout << endl;
+
+                                            char confirm;
+                                            cout << "Confirm deletion of product '" << productName << "' from city '" << city << "' in category '" << category << "'? (y/n): ";
+                                            confirm=_getch();
+
+                                            if (confirm == 'y' || confirm == 'Y') 
+                                                {
+                                                    continue;
+                                                }
+                                        } 
+                                } 
+                            else 
+                                {
+                                    cerr << "Error parsing line: " << line << endl;
+                                }
+
+                            outFile << line << endl;
+                        }
+
+                    inFile.close();
+                    outFile.close();
+
+                    if (!found) 
+                        {
+                            cerr << "Product not found." << endl;
+                            remove("temp.txt");
+                        } 
+                    else 
+                        {
+
+                            remove(filename.c_str());
+                            rename("temp.txt", filename.c_str());
+
+                            system("cls");
+                            
+                            cout << "\n";
+                            cout << "Product '" << productName << "' from city '" << city << "' in category '" << category << "' deleted successfully." << endl;
+                        }
+                }
+
     };
 
 
@@ -896,7 +975,6 @@ class Menu
                     cout << "6. Manage Product\n";
                     cout << "7. Revenue Management\n";
                     cout << "8. Total Products\n";
-                    cout << "9. Author Info\n";
                     cout << "0. Exit Program\n";
                 }
 
@@ -906,6 +984,7 @@ class Menu
                     cout << "1. Change Price\n";
                     cout << "2. Change Quantity\n";
                     cout << "3. Display Each Product Details\n";
+                    cout << "4. Delete Product Details\n";
                     cout << "0. Return to Main Menu\n";
                 }
 
@@ -1154,6 +1233,26 @@ int main()
                                                         break;
                                                     }
                                                 
+                                                case 4:
+                                                    {
+                                                        system("cls");
+
+                                                        string filename = warehouse.FileName+".txt";
+                                                        string productName, city, category;
+                                                        
+                                                        cout << "Enter product name: ";
+                                                        cin >> productName;
+
+                                                        cout << "Enter city: ";
+                                                        cin >> city;
+
+                                                        cout << "Enter category: ";
+                                                        cin >> category;
+
+                                                        manage.deleteProduct(filename, productName, city, category);
+                                                        break;
+                                                    }
+                                                
                                                 case 0:
                                                     {
                                                         load.starload();
@@ -1347,35 +1446,6 @@ int main()
                                 warehouse.countProducts(filename);  
                                 cout << endl << setfill('-') << setw(45) << "" << setfill(' ') << endl;
                                 cout << "\n";
-                                break;
-                            }
-
-                        case 9:
-                            {
-                                
-                                system("cls");
-
-                                cout << endl << endl;
-                                cout << "/***********************************************************************" << endl;
-                                cout << "* Author: Jai Kumar (Jaik)" << endl;
-                                cout << "* Date: April 15, 2024                                                     " << endl;
-                                cout << "*               " << endl;                                                   
-                                cout << "* Description:" << endl;
-                                cout << "*   This program demonstrates a Warehouse Management System." << endl;
-                                cout << "*   You can add your warehouse Locations, Categories, and Products." << endl;
-                                cout << "*   You can filter them, Search your entries" << endl;
-                                cout << "*   Manipulate many Things..!!" << endl;
-                                cout << "* " << endl;
-                                cout << "* Go check out yourself..!!" << endl;
-                                cout << "* " << endl;
-                                cout << "* Additional Things Needed to run this code:" << endl;
-                                cout << "*  1. \"warehouse.txt\" file provided with this code." << endl;
-                                cout << "* " << endl;
-                                cout << "* You can also access all materials through:" << endl;
-                                cout << "* https://github.com/Jaik8205/Warehouse-Management-System-By-JaiK " << endl;
-                                cout << "* " << endl;
-                                cout << "***********************************************************************/" << endl;
-
                                 break;
                             }
                         
