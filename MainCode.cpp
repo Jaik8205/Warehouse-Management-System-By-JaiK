@@ -18,7 +18,6 @@
  * 
  ***********************************************************************/
 
-
                                                                     /*
                                                                     All Header files are declared here
                                                                     */
@@ -884,6 +883,8 @@ class ManageProduct: public WareHouse
                     bool found = false;
                     string line;
 
+                    char confirm;
+
                     while (getline(inFile, line)) 
                         {
                             string entryCity, entryCategory, entryProductName;
@@ -899,17 +900,18 @@ class ManageProduct: public WareHouse
                                     if (entryCity == city && entryCategory == category && entryProductName == productName) 
                                         {
                                             found = true;
-                                            cout << "Details for product '" << productName << "':" << endl;
-                                            cout << setfill('-') << setw(15) << "" << setfill(' ') << endl;
+                                            cout << endl << "Details for product '" << productName << "':" << endl;
+                                            cout << setfill('-') << setw(25) << "" << setfill(' ') << endl;
                                             cout << setw(15) << left << "City:" << setw(15) << left << entryCity << endl;
                                             cout << setw(15) << left << "Category:" << setw(15) << left << entryCategory << endl;
                                             cout << setw(15) << left << "Product Name:" << setw(15) << left << entryProductName << endl;
                                             cout << setw(15) << left << "Price:" << setw(15) << left << price << endl;
                                             cout << setw(15) << left << "Quantity:" << setw(15) << left << quantity << endl;
                                             cout << setw(15) << left << "Weight:" << setw(15) << left << weight << endl;
+                                            cout << setfill('-') << setw(25) << "" << setfill(' ') << endl;
                                             cout << endl;
 
-                                            char confirm;
+                                            // char confirm;
                                             cout << "Confirm deletion of product '" << productName << "' from city '" << city << "' in category '" << category << "'? (y/n): ";
                                             confirm=_getch();
 
@@ -944,7 +946,14 @@ class ManageProduct: public WareHouse
                             system("cls");
                             
                             cout << "\n";
-                            cout << "Product '" << productName << "' from city '" << city << "' in category '" << category << "' deleted successfully." << endl;
+                            if(confirm == 'y' || confirm== 'Y')
+                                {
+                                    cout << "Product '" << productName << "' from city '" << city << "' in category '" << category << "' deleted SUCCESSFULLY." << endl;
+                                }
+                            else
+                                {
+                                    cout << "Product Deletion CANCELLED" << endl;
+                                }
                         }
                 }
 
@@ -1240,13 +1249,13 @@ int main()
                                                         string filename = warehouse.FileName+".txt";
                                                         string productName, city, category;
                                                         
-                                                        cout << "Enter product name: ";
+                                                        cout << endl << "Enter product name: ";
                                                         cin >> productName;
 
-                                                        cout << "Enter city: ";
+                                                        cout << endl << "Enter city: ";
                                                         cin >> city;
 
-                                                        cout << "Enter category: ";
+                                                        cout << endl << "Enter category: ";
                                                         cin >> category;
 
                                                         manage.deleteProduct(filename, productName, city, category);
