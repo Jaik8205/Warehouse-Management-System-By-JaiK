@@ -61,10 +61,6 @@ Here the warehouse charges a certain amount of fees per 'Kg' on products, by whi
 
 here you can see the total products stored in all our warehouses.
 
-### Searching for Products
-
-Use the search functionality to find specific products by name, category, or warehouse location.
-
 ## Troubleshooting
 
 - If encountering issues with file operations or data retrieval, ensure the `warehouse.txt` file is accessible and correctly formatted.
