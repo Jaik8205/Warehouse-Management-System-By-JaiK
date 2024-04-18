@@ -51,7 +51,9 @@ Use the search functionality to find specific products by name, category, wareho
 
 ### Managing the Products
 
-Use the Manage Product functionality to change prices or Quantity. If you want to see details of a particular product that feature is available here.
+Use the Manage Product functionality to change prices or Quantity.
+If you want to see details of a particular product that feature is available here.
+Also, you can delete a particular product if you want.
 
 ### Revenue Management
 
