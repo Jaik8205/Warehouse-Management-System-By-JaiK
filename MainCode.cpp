@@ -17,7 +17,6 @@
  * https://github.com/Jaik8205/Warehouse-Management-System-By-JaiK 
  * 
  ***********************************************************************/
-
                                                                     /*
                                                                     All Header files are declared here
                                                                     */
@@ -221,7 +220,9 @@ class animation
                                                                     
                                                                     This class contains:
                                                                         1. Add Product              :   (to add products to the warehouse)
-                                                                        2. Listcities               :   (to list all the cities in which our warehouses are present)
+                                                                        2. ListUnique               :   (to list all the cities in which our warehouses are present
+                                                                                                        also this is a virtual function because it has beed overridden
+                                                                                                        in class ManageProduct)
                                                                         3. ListUniqueCategories     :   (to list all categories in which we categorize our stock)
                                                                         4. displayproductfromfile   :   (to list all the product from all the categories
                                                                                                          available in all cities)
@@ -273,7 +274,7 @@ class WareHouse : public animation
                     inputFile.close();
                 }
 
-            void listcities() 
+            virtual void listUnique() 
                 {
                     string filename = FileName + ".txt";
                     ifstream file(filename);
@@ -303,45 +304,6 @@ class WareHouse : public animation
                         {
                             cout << setfill('-') << setw(20) << "" << setfill(' ') << endl;
                             cout << category << endl;
-                        }
-                }
-
-            void listUniqueCategories(const string& filename) 
-                {
-                    ifstream file(filename);
-
-                    if (!file.is_open()) 
-                        {
-                            cerr << "Error opening file: " << filename << endl;
-                            return;
-                        }
-
-                    set<string> uniqueCategories;
-                    string line;
-
-                    while (getline(file, line)) 
-                        {
-                            stringstream ss(line);
-                            string city, category, productName;
-                            double price;
-                            int quantity;
-                            double weight;
-                            char delimiter;
-
-                            if (ss >> city >> delimiter >> category >> delimiter >> productName >> delimiter >> price >> delimiter >> quantity >> delimiter >> weight) 
-                                {
-                                    uniqueCategories.insert(category);
-                                }
-                        }
-
-                    file.close();
-
-                    cout << "\n   All Categories" << endl;
-                
-                    for (const auto& category : uniqueCategories) 
-                        {
-                            cout << setfill('-') << setw(20) << "" << setfill(' ') << endl;
-                            cout << setw(20) << left << category << endl;
                         }
                 }
 
@@ -609,15 +571,59 @@ class Revenue
                                                                     here class WareHouse is Inherited by class Manageproduct,
                                                                     
                                                                     This class Contains:
-                                                                        1. changeprice  :   (to change the price of a product)
-                                                                        2. displayproducts  :   (to show details of a particular product)
-                                                                        3. changequanity    :   (to change quantity of a product)
+                                                                        1. listUnique       :   (here this function is used to display unique categories by 
+                                                                                                overriding a listUnique functions in base class
+                                                                                                which is used for displaying unique cities)
+                                                                        2. changeprice      :   (to change the price of a product)
+                                                                        3. displayproducts  :   (to show details of a particular product)
+                                                                        4. changequanity    :   (to change quantity of a product)
 
                                                                     This class depicts that warehouses are constantly Importing and Exporting products        
                                                                     */
 class ManageProduct: public WareHouse
     {
         public:
+      
+            void listUnique()
+                {
+
+                    string filename = FileName + ".txt";
+                    ifstream file(filename);
+
+                    if (!file.is_open()) 
+                        {
+                            cerr << "Error opening file: " << filename << endl;
+                            return;
+                        }
+
+                    set<string> uniqueCategories;
+                    string line;
+
+                    while (getline(file, line)) 
+                        {
+                            stringstream ss(line);
+                            string city, category, productName;
+                            double price;
+                            int quantity;
+                            double weight;
+                            char delimiter;
+
+                            if (ss >> city >> delimiter >> category >> delimiter >> productName >> delimiter >> price >> delimiter >> quantity >> delimiter >> weight) 
+                                {
+                                    uniqueCategories.insert(category);
+                                }
+                        }
+
+                    file.close();
+
+                    cout << "\n\n::All Categories::" << endl;
+                
+                    for (const auto& category : uniqueCategories) 
+                        {
+                            cout << setfill('-') << setw(20) << "" << setfill(' ') << endl;
+                            cout << setw(20) << left << category << endl;
+                        }
+                }
 
             void changePrice(const string& filename, const string& productName, double newPrice) 
                 {
@@ -984,7 +990,6 @@ class Menu
                     cout << "6. Manage Product\n";
                     cout << "7. Revenue Management\n";
                     cout << "8. Total Products\n";
-                    cout << "9. Author Info\n";
                     cout << "0. Exit Program\n";
                 }
 
@@ -1033,6 +1038,7 @@ int main()
         Menu menu;
         Revenue money;
         WareHouse warehouse;               
+        ManageProduct manage;
 
         load.consolecolor();
         
@@ -1094,7 +1100,7 @@ int main()
                         case 2:
                             {
                                 system("cls");  
-                                warehouse.listcities();
+                                manage.listUnique();
                                 break;
                             }
                         
@@ -1102,7 +1108,7 @@ int main()
                             {
                                 system("cls");
                                 string filename = warehouse.FileName+".txt";
-                                warehouse.listUniqueCategories(filename);
+                                warehouse.listUnique();
                                 break;
                             }
 
@@ -1193,7 +1199,6 @@ int main()
                         case 6:
                             {
                                 system("cls");
-                                ManageProduct manage;
                                 string productName;
                                 int option2;
                             
