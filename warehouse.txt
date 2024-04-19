@@ -203,5 +203,5 @@ chennai | furniture | coffee_table | 4500 | 18 | 0.6
 delhi | fitness | resistance_band | 300 | 25 | 0.2
 pune | spare_parts | laptop_case | 1000 | 15 | 0.3
 bengaluru | electronics | portable_hard_drive | 1500 | 25 | 0.3
-pune | electronics | fitness_tracker | 3000 | 22 | 0.4
+pune | electronics | fit_tracker | 3000 | 22 | 0.4
 hyderabad | consumables | butter | 80 | 25 | 0.1
