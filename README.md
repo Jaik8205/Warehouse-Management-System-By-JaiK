@@ -50,6 +50,8 @@ To run this program, ensure you have the following:
 ### Searching for Products
 
 - Use the search functionality to find specific products by name, category, warehouse location, or warehouse location and category.
+- here you can see the total products stored in all our warehouses.
+
 
 ### Managing the Products
 
@@ -66,9 +68,9 @@ To run this program, ensure you have the following:
 - Here you can change text color in your terminal.
 - Also you can change theme color in your terminal.
 
-### Total Products
+### Author Info
 
-- here you can see the total products stored in all our warehouses.
+- Author Info can also be seen here.
 
 ## Troubleshooting
 
