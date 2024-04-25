@@ -1143,7 +1143,7 @@ class Menu
                     cout << "6. Blue\n";
                     cout << "7. Purple\n";
                     cout << "8. Cyan\n";
-                    cout << "0. Return To Main Menu\n";
+                    cout << "0. Return To Cosmetic Menu\n";
                 }
             
             void ThemeColorMenu()
@@ -1151,7 +1151,7 @@ class Menu
                     cout << "\n\n";
                     cout << "1. Light Theme (default)\n";
                     cout << "2. Dark Theme\n";
-                    cout << "0. Return To Main Menu\n";
+                    cout << "0. Return To Cosmetic Menu\n";
                 }
     };
 
