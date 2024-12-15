@@ -1,6 +1,6 @@
-# Warehouse Management System by Jai Kumar and Ankit Kumar (Jaik) and (ANK)
+# Warehouse Management System by Jai Kumar(Jaik)
 
-This program is a Warehouse Management System designed by Jai Kumar (Jaik) and Ankit Kumar(ANK) to manage warehouse locations, categories, products, and operations.
+This program is a Warehouse Management System designed by Jai Kumar (Jaik) to manage warehouse locations, categories, products, and operations.
 
 ## Overview
 
